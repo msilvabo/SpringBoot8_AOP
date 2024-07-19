@@ -14,16 +14,21 @@ import java.util.Arrays;
 @Aspect
 @Component
 public class GreetingAspect {
+
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Before("execution(* com.learning.springbootaop.services.GreetingService.*(..))")
+    @Pointcut("execution(* com.learning.springbootaop.services.GreetingService.*(..))")
+    private void greetingLoggerPointCut(){
+    }
+
+    @Before("greetingLoggerPointCut()")
 //    @Before("execution(* com.learning.springbootaop..*.*(..))")
     public void loggerBefore(JoinPoint joinPoint) {
         String method = joinPoint.getSignature().getName();
         String args = Arrays.toString(joinPoint.getArgs());
         logger.info("Before ...." + method + " con los argumentos  .. " + args);
     }
-    @After("execution(* com.learning.springbootaop.services.GreetingService.*(..))")
+    @After("greetingLoggerPointCut()")
     public void loggerAfter(JoinPoint joinPoint) {
         String method = joinPoint.getSignature().getName();
         String args = Arrays.toString(joinPoint.getArgs());
@@ -36,14 +41,14 @@ public class GreetingAspect {
         String args = Arrays.toString(joinPoint.getArgs());
         logger.info("AfterReturning ...." + method + " con los argumentos  .. " + args);
     }
-    @AfterThrowing("execution(* com.learning.springbootaop.services.GreetingService.*(..))")
+    @AfterThrowing("greetingLoggerPointCut()")
     public void AfterThrowing(JoinPoint joinPoint) {
         String method = joinPoint.getSignature().getName();
         String args = Arrays.toString(joinPoint.getArgs());
         logger.info("AfterThrowing ...." + method + " con los argumentos  .. " + args);
     }
 
-    @Around("execution(* com.learning.springbootaop.services.*.*(..))")
+    @Around("greetingLoggerPointCut()")
     public Object loggerAround(ProceedingJoinPoint joinPoint) throws Throwable {
         String method = joinPoint.getSignature().getName();
         String args = Arrays.toString(joinPoint.getArgs());
