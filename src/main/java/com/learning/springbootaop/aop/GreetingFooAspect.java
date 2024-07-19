@@ -18,17 +18,15 @@ import java.util.Arrays;
 public class GreetingFooAspect {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Pointcut("execution(* com.learning.springbootaop.services.GreetingService.*(..))")
-    private void greetingFooAspectPointCut(){
-    }
 
-    @Before("greetingFooAspectPointCut()")
+
+    @Before("GreetingServicesPointcuts.greetingFooAspectPointCut()")
     public void loggerBefore(JoinPoint joinPoint) {
         String method = joinPoint.getSignature().getName();
         String args = Arrays.toString(joinPoint.getArgs());
         logger.info("Before GreetingFOO...." + method + " con los argumentos  .. " + args);
     }
-    @After("greetingFooAspectPointCut()")
+    @After("GreetingServicesPointcuts.greetingFooAspectPointCut()")
     public void loggerAfter(JoinPoint joinPoint) {
         String method = joinPoint.getSignature().getName();
         String args = Arrays.toString(joinPoint.getArgs());

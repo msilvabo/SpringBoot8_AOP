@@ -17,38 +17,36 @@ public class GreetingAspect {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Pointcut("execution(* com.learning.springbootaop.services.GreetingService.*(..))")
-    private void greetingLoggerPointCut(){
-    }
 
-    @Before("greetingLoggerPointCut()")
+
+    @Before("GreetingServicesPointcuts.greetingLoggerPointCut()")
 //    @Before("execution(* com.learning.springbootaop..*.*(..))")
     public void loggerBefore(JoinPoint joinPoint) {
         String method = joinPoint.getSignature().getName();
         String args = Arrays.toString(joinPoint.getArgs());
         logger.info("Before ...." + method + " con los argumentos  .. " + args);
     }
-    @After("greetingLoggerPointCut()")
+    @After("GreetingServicesPointcuts.greetingLoggerPointCut()")
     public void loggerAfter(JoinPoint joinPoint) {
         String method = joinPoint.getSignature().getName();
         String args = Arrays.toString(joinPoint.getArgs());
         logger.info("After ...." + method + " con los argumentos  .. " + args);
     }
 
-    @AfterReturning("execution(* com.learning.springbootaop.services.GreetingService.*(..))")
+    @AfterReturning("GreetingServicesPointcuts.greetingLoggerPointCut()")
     public void AfterReturning(JoinPoint joinPoint) {
         String method = joinPoint.getSignature().getName();
         String args = Arrays.toString(joinPoint.getArgs());
         logger.info("AfterReturning ...." + method + " con los argumentos  .. " + args);
     }
-    @AfterThrowing("greetingLoggerPointCut()")
+    @AfterThrowing("GreetingServicesPointcuts.greetingLoggerPointCut()")
     public void AfterThrowing(JoinPoint joinPoint) {
         String method = joinPoint.getSignature().getName();
         String args = Arrays.toString(joinPoint.getArgs());
         logger.info("AfterThrowing ...." + method + " con los argumentos  .. " + args);
     }
 
-    @Around("greetingLoggerPointCut()")
+    @Around("GreetingServicesPointcuts.greetingLoggerPointCut()")
     public Object loggerAround(ProceedingJoinPoint joinPoint) throws Throwable {
         String method = joinPoint.getSignature().getName();
         String args = Arrays.toString(joinPoint.getArgs());
