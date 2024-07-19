@@ -15,4 +15,8 @@ public class GreetingServiceImpl implements GreetingService{
         log.info(greet);
         return greet;
     }
+    @Override
+    public String sayHelloError(String person, String greeting) {
+        throw new RuntimeException("algun mensaje de error");
+    }
 }

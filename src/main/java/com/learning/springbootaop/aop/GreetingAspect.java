@@ -40,4 +40,10 @@ public class GreetingAspect {
         String args = Arrays.toString(joinPoint.getArgs());
         logger.info("Despues Retorno ...." + method + " con los argumentos  .. " + args);
     }
+    @AfterThrowing("execution(* com.learning.springbootaop.services.GreetingService.*(..))")
+    public void AfterThrowing(JoinPoint joinPoint) {
+        String method = joinPoint.getSignature().getName();
+        String args = Arrays.toString(joinPoint.getArgs());
+        logger.info("AfterThrowing ...." + method + " con los argumentos  .. " + args);
+    }
 }
